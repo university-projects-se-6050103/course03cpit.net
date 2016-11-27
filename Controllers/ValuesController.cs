@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using apartment_renovation_cost.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace apartment_renovation_cost.Controllers
@@ -6,6 +8,17 @@ namespace apartment_renovation_cost.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        public ValuesController()
+        {
+            using (var db = new MaterialContext())
+            {
+                foreach (var material in db.materials)
+                {
+                    Console.WriteLine(material.name);
+                }
+            }
+        }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
