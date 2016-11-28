@@ -17,9 +17,25 @@ function onAddRoom() {
 
 function onCalculate() {
   const userInput = readUserInput();
-  console.log('userInput', userInput);
+  console.log('[user-input]', userInput);
 
-  // fetch(`${API_ENDPOINT}/`)
+  getRenovationPrice(userInput).then(json => {
+    console.log('[price-response]', json);
+
+    $('[data-role=results]').text(`Price: ${json}$`);
+  });
+}
+
+function getRenovationPrice(userInput) {
+  return fetch(`${API_ENDPOINT}/price`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userInput)
+    })
+    .then(response => response.json());
 }
 
 function initializeMaterialsSelectors() {
