@@ -2,20 +2,20 @@ const API_ENDPOINT = 'http://localhost:5000/api';
 const MATERIAL_CATEGORIES = ['floor', 'walls', 'ceiling', 'windows'];
 
 window.onload = () => {
-  $('[data-action=add-room]').on('click', addRoomEntryInput);
-  $('[data-action=calculate]').on('click', calculateRenovation);
+  $('[data-action=add-room]').on('click', onAddRoom);
+  $('[data-action=calculate]').on('click', onCalculate);
 
   initializeMaterialsSelectors();
 };
 
-function addRoomEntryInput() {
+function onAddRoom() {
   const $roomForm = $('#room-form');
   const $roomEntry = $roomForm.find('.room-entry:last');
 
   $roomForm.append($roomEntry.prop('outerHTML'));
 }
 
-function calculateRenovation() {
+function onCalculate() {
   const userInput = readUserInput();
   console.log('userInput', userInput);
 
@@ -27,10 +27,6 @@ function initializeMaterialsSelectors() {
 }
 
 function populateMaterialsFor(materialCategory) {
-  if (!MATERIAL_CATEGORIES.some(validCategory => validCategory !== materialCategory)) {
-    console.error('Unsupported material category');
-  }
-
   return getMaterialsFor(materialCategory)
     .then(materials => {
       materials.forEach(materialName => {
@@ -54,19 +50,32 @@ function addMaterialToList(materialCategory, materialName) {
 }
 
 function readUserInput() {
-  const inputs = {rooms: []};
+  const userInput = readMaterialsInputs();
+  userInput.rooms = readRoomsDimensions();
 
-  MATERIAL_CATEGORIES.forEach(category => {
-    inputs[category] = $(`#${category}-material-select`).val();
-  });
+  return userInput;
+}
 
-  inputs.rooms = $('.room-entry').map((index, entry) => {
-    const x = Number($(entry).find('.room-dimension-x').val());
-    const y = Number($(entry).find('.room-dimension-y').val());
-    const z = Number($(entry).find('.room-dimension-z').val());
+function readMaterialsInputs() {
+  return MATERIAL_CATEGORIES.reduce((memo, category) => {
+    memo[category] = $(`#${category}-material-select`).val();
+    return memo;
+  }, {});
+}
 
-    return {x, y, z};
-  }).toArray();
+function readRoomsDimensions() {
+  return $('.room-entry')
+    .map((index, entry) => {
+      const getDimension = (dimension) => {
+        const $dimension = $(entry).find(`.room-dimension-${dimension}`);
+        return Number($dimension.val());
+      };
 
-  return inputs;
+      return {
+        x: getDimension('x'),
+        y: getDimension('y'),
+        z: getDimension('z')
+      };
+    })
+    .toArray();
 }
