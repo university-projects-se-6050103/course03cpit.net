@@ -1,36 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using apartment_renovation_cost.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace apartment_renovation_cost.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class MaterialsController : Controller
     {
-        public ValuesController()
-        {
-            using (var db = new MaterialContext())
-            {
-                foreach (var material in db.materials)
-                {
-                    Console.WriteLine(material.name);
-                }
-            }
-        }
+        private readonly MaterialContext _db = new MaterialContext();
 
-        // GET api/values
+        // GET api/materials?category=some
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> Get([FromQuery] string category)
         {
-            return new string[] {"value1", "value2"};
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
+            return _db.materials
+                .Where(material => material.category == category)
+                .Select(material => material.name);
         }
 
         // POST api/values
