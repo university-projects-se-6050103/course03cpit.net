@@ -9,12 +9,16 @@ window.onload = () => {
     $roomForm.append($roomEntry.html());
   });
 
+  $('[data-action=calculate]').on('click', () => {
+
+  });
+
   MATERIAL_CATEGORIES.forEach(populateMaterialsFor);
 };
 
 function populateMaterialsFor(materialCategory) {
-  if (!MATERIAL_CATEGORIES.some(category => category !== materialCategory)) {
-    console.error('Unsupported material');
+  if (!MATERIAL_CATEGORIES.some(validCategory => validCategory !== materialCategory)) {
+    console.error('Unsupported material category');
   }
 
   return getMaterialsFor(materialCategory)
@@ -25,8 +29,8 @@ function populateMaterialsFor(materialCategory) {
     });
 }
 
-function getMaterialsFor(material) {
-  return fetch(`${API_ENDPOINT}/materials?category=${material}`)
+function getMaterialsFor(category) {
+  return fetch(`${API_ENDPOINT}/materials?category=${category}`)
     .then(response => response.json())
     .then(json => {
       console.log('[getMaterialsFor][json]', json);
@@ -35,8 +39,6 @@ function getMaterialsFor(material) {
 }
 
 function addMaterialToList(materialCategory, materialName) {
-  const option = document.createElement('option');
-  option.innerHTML = materialName;
-
-  $(`#${materialCategory}-material-select`).append(option.outerHTML);
+  $(`#${materialCategory}-material-select`)
+    .append($('<option>').text(materialName));
 }
