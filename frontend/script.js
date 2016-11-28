@@ -9,6 +9,7 @@ window.onload = () => {
   });
 
   populateMaterialsFor('floor');
+  populateMaterialsFor('walls');
 };
 
 // Material Categories
