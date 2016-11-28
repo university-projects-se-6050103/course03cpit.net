@@ -2,20 +2,25 @@ const API_ENDPOINT = 'http://localhost:5000/api';
 const MATERIAL_CATEGORIES = ['floor', 'walls', 'ceiling', 'windows'];
 
 window.onload = () => {
-  $('[data-action=add-room]').on('click', () => {
-    const $roomForm = $('#room-form');
-    const $roomEntry = $roomForm.find('.room-entry:last');
-
-    $roomForm.append($roomEntry.prop('outerHTML'));
-  });
-
-  $('[data-action=calculate]').on('click', () => {
-    const inputs = getInputs();
-    console.log('inputs', inputs);
-  });
+  $('[data-action=add-room]').on('click', addRoomEntryInput);
+  $('[data-action=calculate]').on('click', calculateRenovation);
 
   initializeMaterialsSelectors();
 };
+
+function addRoomEntryInput() {
+  const $roomForm = $('#room-form');
+  const $roomEntry = $roomForm.find('.room-entry:last');
+
+  $roomForm.append($roomEntry.prop('outerHTML'));
+}
+
+function calculateRenovation() {
+  const userInput = readUserInput();
+  console.log('userInput', userInput);
+
+  // fetch(`${API_ENDPOINT}/`)
+}
 
 function initializeMaterialsSelectors() {
   MATERIAL_CATEGORIES.forEach(populateMaterialsFor);
@@ -48,7 +53,7 @@ function addMaterialToList(materialCategory, materialName) {
     .append($('<option>').text(materialName));
 }
 
-function getInputs() {
+function readUserInput() {
   const inputs = {rooms: []};
 
   MATERIAL_CATEGORIES.forEach(category => {
