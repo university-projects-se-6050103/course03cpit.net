@@ -10,6 +10,7 @@ window.onload = () => {
 
   populateMaterialsFor('floor');
   populateMaterialsFor('walls');
+  populateMaterialsFor('ceiling');
 };
 
 // Material Categories
