@@ -1,4 +1,5 @@
 const API_ENDPOINT = 'http://localhost:5000/api';
+const MATERIAL_CATEGORIES = ['floor', 'walls', 'ceiling', 'windows'];
 
 window.onload = () => {
   $('[data-action=add-room]').on('click', () => {
@@ -8,13 +9,8 @@ window.onload = () => {
     $roomForm.append($roomEntry.html());
   });
 
-  populateMaterialsFor('floor');
-  populateMaterialsFor('walls');
-  populateMaterialsFor('ceiling');
+  MATERIAL_CATEGORIES.forEach(populateMaterialsFor);
 };
-
-// Material Categories
-const MATERIAL_CATEGORIES = ['floor', 'walls', 'ceiling', 'windows'];
 
 function populateMaterialsFor(materialCategory) {
   if (!MATERIAL_CATEGORIES.some(category => category !== materialCategory)) {
