@@ -5,11 +5,16 @@ namespace apartment_renovation_cost.Models
 {
     public class MaterialsService
     {
-        private static readonly DbSet<Material> Materials = new MaterialContext().materials;
+        private readonly DbSet<Material> _materials;
 
-        public static double GetPriceFor(string materialName)
+        public MaterialsService(MaterialContext materialContext)
         {
-            return Materials
+            _materials = materialContext.materials;
+        }
+
+        public double GetPriceFor(string materialName)
+        {
+            return _materials
                 .Where(m => m.name == materialName)
                 .Select(m => m.price)
                 .FirstOrDefault();
