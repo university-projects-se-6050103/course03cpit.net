@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using apartment_renovation_cost.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -11,15 +9,20 @@ namespace apartment_renovation_cost.Controllers
     [EnableCors("AllowSpecificOrigin")]
     public class PriceController : Controller
     {
-        private readonly MaterialContext _db = new MaterialContext();
+        private readonly MaterialsService _materialsService = new MaterialsService(new MaterialContext());
 
         // POST api/price
         [HttpPost]
         [EnableCors("AllowSpecificOrigin")]
         public double Post([FromBody] UserInput userInput)
         {
-            Console.WriteLine("Hello floor " + userInput.floor);
-            return 2.0;
+            return new RenovationCalculator(_materialsService)
+                .AddRooms(userInput.rooms)
+                .AddFloor(userInput.floor)
+                .AddCeiling(userInput.ceiling)
+                .AddWalls(userInput.walls)
+                .AddWindows(userInput.windows)
+                .GetTotalPrice();
         }
     }
 
@@ -29,13 +32,6 @@ namespace apartment_renovation_cost.Controllers
         public string ceiling { get; set; }
         public string walls { get; set; }
         public string windows { get; set; }
-        public List<RoomDimension> rooms { get; set; }
-    }
-
-    public class RoomDimension
-    {
-        public int x { get; set; }
-        public int y { get; set; }
-        public int z { get; set; }
+        public List<Room> rooms { get; set; }
     }
 }
