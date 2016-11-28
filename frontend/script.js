@@ -4,17 +4,22 @@ const MATERIAL_CATEGORIES = ['floor', 'walls', 'ceiling', 'windows'];
 window.onload = () => {
   $('[data-action=add-room]').on('click', () => {
     const $roomForm = $('#room-form');
-    const $roomEntry = $roomForm.find('.room-entry').last();
+    const $roomEntry = $roomForm.find('.room-entry:last');
 
-    $roomForm.append($roomEntry.html());
+    $roomForm.append($roomEntry.prop('outerHTML'));
   });
 
   $('[data-action=calculate]').on('click', () => {
-
+    const inputs = getInputs();
+    console.log('inputs', inputs);
   });
 
-  MATERIAL_CATEGORIES.forEach(populateMaterialsFor);
+  initializeMaterialsSelectors();
 };
+
+function initializeMaterialsSelectors() {
+  MATERIAL_CATEGORIES.forEach(populateMaterialsFor);
+}
 
 function populateMaterialsFor(materialCategory) {
   if (!MATERIAL_CATEGORIES.some(validCategory => validCategory !== materialCategory)) {
@@ -41,4 +46,22 @@ function getMaterialsFor(category) {
 function addMaterialToList(materialCategory, materialName) {
   $(`#${materialCategory}-material-select`)
     .append($('<option>').text(materialName));
+}
+
+function getInputs() {
+  const inputs = {rooms: []};
+
+  MATERIAL_CATEGORIES.forEach(category => {
+    inputs[category] = $(`#${category}-material-select`).val();
+  });
+
+  inputs.rooms = $('.room-entry').map((index, entry) => {
+    const x = Number($(entry).find('.room-dimension-x').val());
+    const y = Number($(entry).find('.room-dimension-y').val());
+    const z = Number($(entry).find('.room-dimension-z').val());
+
+    return {x, y, z};
+  }).toArray();
+
+  return inputs;
 }
