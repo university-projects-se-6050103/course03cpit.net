@@ -38,7 +38,7 @@ namespace apartment_renovation_cost
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin",
-                    builder => builder.WithOrigins("*"));
+                    builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             });
         }
 
