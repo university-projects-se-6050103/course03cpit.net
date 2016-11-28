@@ -34,6 +34,12 @@ namespace apartment_renovation_cost
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("*"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -47,6 +53,8 @@ namespace apartment_renovation_cost
             app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseMvc();
+
+            app.UseCors(builder => builder.WithOrigins("*"));
         }
     }
 }
