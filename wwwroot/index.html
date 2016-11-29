@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="#" class="navbar-brand">ARMCC - Apartment Renovation Materials Cost Calculator</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-md-6">
+            <!--<Rooms>-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Rooms</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-inline" id="room-form">
+                        <p>
+                            <button class="btn btn-info" data-action="add-room">
+                                Add one more room
+                            </button>
+                        </p>
+                        <div class="room-entry">
+                            <div class="form-group">
+                                <label for="room-dimension-x">X</label>
+                                <input type="number" class="form-control room-dimension-x" id="room-dimension-x"
+                                       min="1" max="1000" placeholder="0" value="24">
+                            </div>
+                            <div class="form-group">
+                                <label for="room-dimension-y">Y</label>
+                                <input type="number" class="form-control room-dimension-y" id="room-dimension-y"
+                                       min="1" max="1000" placeholder="0" value="30">
+                            </div>
+                            <div class="form-group">
+                                <label for="room-dimension-z">Z</label>
+                                <input type="number" class="form-control room-dimension-z" id="room-dimension-z"
+                                       min="1" max="10" placeholder="0" value="2">
+                            </div>
+                            <hr>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--</Rooms>-->
+
+            <!--<Floors>-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Floors</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="floor-material-select">Матеріал</label>
+                        <select name="floor-material-select" id="floor-material-select"></select>
+                    </div>
+                </div>
+            </div>
+            <!--</Floors>-->
+
+            <!--<Walls>-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Walls</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="walls-material-select">Матеріал</label>
+                        <select name="walls-material-select" id="walls-material-select"></select>
+                    </div>
+                </div>
+            </div>
+            <!--</Walls>-->
+
+            <!--<Ceiling>-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Ceiling</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="ceiling-material-select">Матеріал</label>
+                        <select name="ceiling-material-select" id="ceiling-material-select"></select>
+                    </div>
+                </div>
+            </div>
+            <!--</Ceiling>-->
+
+            <!--<Windows>-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Windows</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="windows-material-select">Матеріал</label>
+                        <select name="windows-material-select" id="windows-material-select"></select>
+                    </div>
+                </div>
+            </div>
+            <!--</Windows>-->
+        </div>
+
+        <div class="col col-md-6">
+            <p>
+                <button class="btn btn-lg btn-success" data-action="calculate">
+                    Calculate
+                </button>
+            </p>
+
+            <p class="well" data-role="results">
+                Calculated price will be here:
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="./script.js"></script>
+
+</body>
+</html>
