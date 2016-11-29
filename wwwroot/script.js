@@ -8,7 +8,8 @@ window.onload = () => {
   initializeMaterialsSelectors();
 };
 
-function onAddRoom() {
+function onAddRoom(event) {
+  event.preventDefault();
   const $roomForm = $('#room-form');
   const $roomEntry = $roomForm.find('.room-entry:last');
 
