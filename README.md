@@ -17,6 +17,16 @@ API Endpoints:
 * `GET` /api/materials?category=some
 * `POST` /api/price
 
+## Diagrams
+
+### Class Diagram
+
+![class diagram](http://i.imgur.com/DqTwbjW.png)
+
+### DB Diagram
+
+![db diagram](http://i.imgur.com/NGi7WPQ.png)
+
 ## Run
 
 ```shell
