@@ -10,7 +10,7 @@
 
 ## Result
 
-![screenshot](screenshot.png)
+![screenshot](http://i.imgur.com/fZ8X2OD.png)
 
 ## Run
 
