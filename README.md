@@ -1,3 +1,17 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [ARMCC - Apartment Renovation Materials Cost Calculator](#armcc---apartment-renovation-materials-cost-calculator)
+  - [Description](#description)
+  - [Result](#result)
+  - [Diagrams](#diagrams)
+    - [Class Diagram](#class-diagram)
+    - [DB Diagram](#db-diagram)
+  - [Run](#run)
+  - [Build Docker Image](#build-docker-image)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # ARMCC - Apartment Renovation Materials Cost Calculator
 
 ## Description
