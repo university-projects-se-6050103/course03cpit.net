@@ -10,11 +10,11 @@
 
 ## Run
 
-```
+```shell
 $ docker run -p 5000:80 vladgolubev/arpc
 ```
 
-Now visit [http://localhost:5000/](localhost:5000) from your Browser.
+Now visit [localhost:5000](http://localhost:5000/) from your Browser.
 
 ## Build Docker Image
 
