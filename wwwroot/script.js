@@ -1,4 +1,4 @@
-const API_ENDPOINT = 'http://localhost:5000/api';
+const API_ENDPOINT = `http://${document.location.host}/api`;
 const MATERIAL_CATEGORIES = ['floor', 'walls', 'ceiling', 'windows'];
 
 window.onload = () => {
