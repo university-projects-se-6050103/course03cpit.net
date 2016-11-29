@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.StaticFiles;
 
 namespace apartment_renovation_cost
 {
@@ -55,6 +56,8 @@ namespace apartment_renovation_cost
             app.UseMvc();
 
             app.UseCors(builder => builder.WithOrigins("*"));
+
+            app.UseStaticFiles();
         }
     }
 }
